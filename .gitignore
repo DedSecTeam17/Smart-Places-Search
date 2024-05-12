@@ -5,5 +5,5 @@ node_modules/
 *.pid
 *.seed
 *.pid.lock
-*.json
+addresses.json
 
