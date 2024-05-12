@@ -1,26 +1,19 @@
-# Dockerfile
-FROM ghcr.io/puppeteer/puppeteer:21.5.2
+FROM node:20.10.0
 
-
-ENV PUPPETEER_SKIP_DOWNLOAD=true
-
-
-EXPOSE 1449
-
-
+# Set working directory
 WORKDIR /app
 
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-
-RUN chown -Rh $user:$user /app
-USER $user
-
-COPY package*.json ./
-
+# Install dependencies
 RUN npm install
 
-
+# Copy over the rest of the project
 COPY . .
 
-CMD [ "node", "index.js" ]
+# Expose the port Strapi runs on
+EXPOSE 1449
+
+# Command to run Strapi
+CMD ["node", "index.js"]

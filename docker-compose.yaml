@@ -1,10 +1,12 @@
 version: '3.8'
 services:
   places_app:
-    platform: linux
+    container_name: places_app
     build: .
-    environment:
-      - NODE_ENV=DEVELOPMENT
+    volumes:
+      - ./app:/srv/app
+    ports:
+      - "1449:1449"
     # Removed ports from here, as Nginx will handle incoming traffic
 
   nginx:
