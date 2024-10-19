@@ -8,6 +8,21 @@ const fs = require('fs').promises; // Using the promise-based version of fs
 const {MongoClient} = require('mongodb');
 // const openai = require('openai');
 
+
+
+async function searchForPlace(req) {
+    const {searchTerm} = req.body
+    console.log(req.body)
+    // return await HashAddresses.find({$text: {$search: searchTerm}});
+    const locations = await HashAddresses.find(
+        {$text: {$search: searchTerm}},
+        {score: {$meta: "textScore"}} // Project the text search score
+    ).sort({score: {$meta: "textScore"}})
+        .select("_id full_address name latitude longitude")// Sort by the text search score
+
+    return locations.map(location => location.toObject())
+}
+
 async function queryPlaces(body) {
     const {query, lat, lng, radiusInMeters} = body
 
@@ -60,6 +75,7 @@ async function insertPlaces(googlePlacesJSON) {
     })
 
     const googlePlacesJSONMapped = googlePlacesJSONNewOne
+        .slice(0.5)
         .filter((e) => {
             return e.longitude !== null && e.latitude !== null
         })
@@ -127,5 +143,6 @@ function mapAboutObject(aboutData) {
 
 module.exports = {
     queryPlaces,
-    insertPlaces
+    insertPlaces,
+    searchForPlace
 }

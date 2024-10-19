@@ -1,6 +1,19 @@
-const {queryPlaces,insertPlaces} = require("../services/places_service");
+const {queryPlaces,insertPlaces,searchForPlace} = require("../services/places_service");
 const path = require("path");
 const {promises: fs} = require("fs");
+
+exports.searchForPlace = async (req, res) => {
+    try {
+        const result = await searchForPlace(req)
+
+        res.status(200).send({
+            status: 200, success: true, data: result
+        });
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+};
+
 
 exports.queryPlaces = async (req, res) => {
     try {

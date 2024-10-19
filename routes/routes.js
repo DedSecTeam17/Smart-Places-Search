@@ -10,6 +10,9 @@ const hashAddressesController = require("../controllers/places_controller");
 // router.post('/places',PlacesController.insertPlaces);
 
 
+router.post('/search-place', hashAddressesController.searchForPlace);
+
+
 router.post('/find-place', hashAddressesController.queryPlaces);
 
 router.get('/bulk-places', hashAddressesController.insertPlaces);
