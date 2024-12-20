@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const prNumber = process.argv[2];
 const prBranch = process.argv[3];
-const gitHubToken = process.argv[4];
+const openAiToken = process.argv[4];
 const apiUrl = process.argv[5];
 
 // Fetch the PR diff (the changes)
@@ -31,7 +31,7 @@ const reviewChanges = async (changes) => {
         ]
  },{
          headers: {
-            'Authorization': `Bearer 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`
+            'Authorization': `Bearer ${openAiToken}`
         }
     });
     return reviewResponse.data.choices[0]["message"]["content"];

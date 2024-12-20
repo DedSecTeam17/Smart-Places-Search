@@ -18,13 +18,13 @@ pipeline {
                     // Set environment variables (e.g., GitHub token, API endpoint)
                     def prNumber = env.CHANGE_ID
                     def prBranch = env.CHANGE_BRANCH
-                    def gitHubToken = 'your_github_token' // Store this securely (e.g., Jenkins credentials)
+                    def openAiToken = credentials('openAiToken') // Store this securely (e.g., Jenkins credentials)
                     def apiUrl = 'https://your-api-url.com/review'
                     
                     // Run Node.js script to get PR changes
                     sh '''
                         npm install
-                        node pr-review-script.js $prNumber $prBranch $gitHubToken $apiUrl
+                        node pr-review-script.js $prNumber $prBranch $openAiToken $apiUrl
                     '''
                 }
             }
