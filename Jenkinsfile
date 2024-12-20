@@ -24,7 +24,7 @@ pipeline {
                     // Run Node.js script to get PR changes
                     sh '''
                         npm install
-                        node pr-review-script.js $prNumber $prBranch $openAiToken $apiUrl
+                        node pr-review-script.js 2 $prBranch $openAiToken $apiUrl
                     '''
                 }
             }
