@@ -12,11 +12,20 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+     stage('Run Node.js Script for PR Review') {
             steps {
                 script {
-                    // Run the build command
-                    sh 'npm run build'
+                    // Set environment variables (e.g., GitHub token, API endpoint)
+                    def prNumber = env.CHANGE_ID
+                    def prBranch = env.CHANGE_BRANCH
+                    def openAiToken = credentials('openAiToken') // Store this securely (e.g., Jenkins credentials)
+                    def apiUrl = 'https://your-api-url.com/review'
+                    
+                    // Run Node.js script to get PR changes
+                    sh '''
+                        npm install
+                        node pr-review-script.js $prNumber $prBranch $openAiToken $apiUrl
+                    '''
                 }
             }
         }
