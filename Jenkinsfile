@@ -17,16 +17,7 @@ pipeline {
                 sh 'npm install'
             }
         }
-        // stage('Run Tests') {
-        //     steps {
-        //         sh 'npm test'
-        //     }
-        // }
-        // stage('Build') {
-        //     steps {
-        //         sh 'npm run build'
-        //     }
-        // }
+       
     }
     post {
         always {
