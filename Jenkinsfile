@@ -1,33 +1,24 @@
 pipeline {
     agent any
-    environment {
-        NODE_VERSION = '18.20.5' // Set your desired Node.js version
-    }
     tools {
-        nodejs NODE_VERSION
+        nodejs '18.20.5'  // This should match the name you used in Global Tool Configuration
     }
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                script {
+                    // Install npm packages
+                    sh 'npm install'
+                }
             }
         }
-       
-    }
-    post {
-        always {
-            echo 'Pipeline completed.'
-        }
-        success {
-            echo 'Build succeeded!'
-        }
-        failure {
-            echo 'Build failed!'
+        stage('Build') {
+            steps {
+                script {
+                    // Run the build command
+                    sh 'npm run build'
+                }
+            }
         }
     }
 }
