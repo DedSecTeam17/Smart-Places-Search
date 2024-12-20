@@ -11,6 +11,8 @@ const {MongoClient} = require('mongodb');
 
 
 async function searchForPlace(req) {
+
+    
     const {searchTerm} = req.body
     console.log(req.body)
     // return await HashAddresses.find({$text: {$search: searchTerm}});
