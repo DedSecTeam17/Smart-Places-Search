@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        NODE_VERSION = '18' // Set your desired Node.js version
+        NODE_VERSION = '18.20.5' // Set your desired Node.js version
     }
     tools {
         nodejs NODE_VERSION
